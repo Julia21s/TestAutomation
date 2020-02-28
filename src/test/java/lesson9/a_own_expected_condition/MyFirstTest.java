@@ -39,12 +39,17 @@ public class MyFirstTest {
                 .sendKeys("Dress");
 
         WebElement firstTip = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]")));
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]")));
 
         Assert.assertThat(firstTip.getText(),
                 CoreMatchers.containsString("Dre"));
 
-        WebElement fifthTip = (new WebDriverWait(driver, 10)).until(CustomExpectedCondition.listNthElementHasText(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"), 3, "Dress"));
+        WebElement fifthTip = (new WebDriverWait(driver, 10)).
+                until(CustomExpectedCondition.listNthElementHasText
+                        (By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"),
+                                1,
+                                "Dress"));
     }
 
     @Test(timeout = 5000l)
@@ -56,7 +61,8 @@ public class MyFirstTest {
                 .sendKeys("Dress");
 
         Assert.assertTrue("First tip text was wrong",
-                driver.findElement(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"))
+                driver.findElement(
+                        By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"))
                         .getText().contains("Dress1"));
     }
 }
