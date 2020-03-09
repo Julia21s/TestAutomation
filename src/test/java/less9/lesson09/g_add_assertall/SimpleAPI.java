@@ -1,16 +1,17 @@
 package less9.lesson09.g_add_assertall;
 
-import static lesson08.d_add_assertall.Conditions.VISIBLE;
-
-import java.util.List;
-import java.util.function.Function;
-
+//import static lesson08.d_add_assertall.Conditions.VISIBLE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.function.Function;
+
+import static less9.lesson09.g_add_assertall.Conditions.VISIBLE;
 
 public abstract class SimpleAPI {
 

@@ -1,7 +1,5 @@
 package lesson08.a_first_test;
 
-import java.util.concurrent.TimeUnit;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -11,12 +9,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class MyFirstTest {
 
     static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Julia\\TestStudy\\chromedriver.exe");
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
@@ -39,7 +40,8 @@ public class MyFirstTest {
                 .sendKeys("Dress");
 
         Assert.assertTrue("First tip text was wrong",
-                driver.findElement(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"))
+                driver.findElement(By.xpath("//*[@id=\"search_query_top\"]"))
+                //driver.findElement(By.xpath("//*[@id=\"search_query_top\"]"))
                         .getText().contains("Dress1"));
     }
     
@@ -52,7 +54,8 @@ public class MyFirstTest {
 
         Assert.assertThat(
                 driver
-                        .findElement(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"))
+                      //  .findElement(By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]"))
+                        .findElement(By.xpath("//*[@id=\"search_query_top\"]"))
                         .getText(),
                 CoreMatchers.containsString("Dress"));
     }

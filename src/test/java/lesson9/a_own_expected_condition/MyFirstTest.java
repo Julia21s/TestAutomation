@@ -17,6 +17,7 @@ public class MyFirstTest {
 
     @BeforeClass
     public static void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Julia\\TestStudy\\chromedriver.exe");
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
@@ -43,7 +44,7 @@ public class MyFirstTest {
                         By.xpath("//*[@id=\"index\"]/div[2]/ul/li[1]")));
 
         Assert.assertThat(firstTip.getText(),
-                CoreMatchers.containsString("Dre"));
+                CoreMatchers.containsString("Dress"));
 
         WebElement fifthTip = (new WebDriverWait(driver, 10)).
                 until(CustomExpectedCondition.listNthElementHasText
@@ -53,7 +54,7 @@ public class MyFirstTest {
     }
 
     @Test(timeout = 5000l)
-    @Ignore
+   // @Ignore
     public void verifyFirstTipIsCorrect_viaAssertTrue() {
         driver.findElement(By.id("search_query_top"))
                 .clear();
