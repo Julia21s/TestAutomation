@@ -19,7 +19,7 @@ public class CustomExpectedCondition {
 
             @Override
             public String toString() {
-                return String.format("Failed to find page %s to have in url: %s, in title: %s\n" ,
+                return String.format("Failed to find page to have in url: \"%s\", in title: \"%s\"\n" ,
                        expUrl, expTitle);
             }
         };
