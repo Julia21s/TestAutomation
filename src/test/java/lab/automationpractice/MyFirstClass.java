@@ -51,6 +51,7 @@ public class MyFirstClass {
     }
 
     @AfterClass
+    //@Ignore
     public static void tearDown() {
         //Logout
         driver.findElement(By.xpath ("//*[@id=\"header\"]/div[2]/div/div/nav/div[2]/a")).click();
@@ -84,21 +85,10 @@ public class MyFirstClass {
 
     (new WebDriverWait(driver, 15))
             .until(ExpectedConditions.elementToBeClickable(landingPage.proceed3));
-    landingPage.proceed3.click();
 
-    (new WebDriverWait(driver, 15))
-            .until(ExpectedConditions.visibilityOf(landingPage.proceed4));
-   // Выбор чекбокса. 
-    //Мне очень не нравится. Но провозившись с ним полвечера решила так оставить. Надеюсь что есть более элегантное решение
-    landingPage.terms.sendKeys(Keys.SPACE); // Чекбокс выбран
-    
-// И тут поялвяется окно как будто он не выбран и я кликаю Далее. Почему??? Я пробовала даже ждать 5000 мсек. Но все бесполезно (плАчу)
-    // Мне стыдно, но после мук попытки это побороть я его закрываю и иду дальше
-    // Что я делаю не так? Keys.SPACE завершается Ентером?
-    (new WebDriverWait(driver, 15))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"order\"]/div[2]/div/div/a")));
-    driver.findElement(By.xpath("//*[@id=\"order\"]/div[2]/div/div/a")).click();
-   if(landingPage.terms.isSelected()){landingPage.proceed4.click();}
+    landingPage.terms.click(); // Чекбокс выбран
+
+   landingPage.proceed3.click();
 
     (new WebDriverWait(driver, 15))
             .until(ExpectedConditions.elementToBeClickable(landingPage.proceedPayment));
@@ -113,10 +103,7 @@ public class MyFirstClass {
 // Проверим что мы таки купили успешно
     Assert.assertThat(
             landingPage.confirmText.getText(),
-            CoreMatchers.containsString("Your order on My Store is complete."));
-// поять пол вечера. Как достать текст из (xpath = "//*[@id=\"center_column\"]/div/text()[6]")???
-// Если по этому xpath то ошибка что он не вебэлемент. Если читать что он строка - то он null
-    System.out.println("  "+ landingPage.orderNumber.getText());
+            CoreMatchers.containsString("Your order on My Store is complete."));System.out.println("  "+ landingPage.orderNumber.getText());
     //Не нашла ничего лучше, как считать всю таблицу стразу. И взять весь ее текст. И найти в нем номер заказа.
     // Хотя хотелось бы более элегантного решения
 
@@ -156,15 +143,12 @@ public class MyFirstClass {
 
         @FindBy(xpath = "//*[@id=\"center_column\"]/form/p/button/span")
         private WebElement proceed2;
-        //*[@id="form"]/p/button/span
-        @FindBy(xpath = " //*[@id=\"form\"]/p/button/span")
-        private WebElement proceed3;
 
         @FindBy(xpath = "//*[@id=\"cgv\"]")
         private WebElement terms;
 
         @FindBy(xpath = "//*[@id=\"form\"]/p/button/span")
-        private WebElement proceed4;
+        private WebElement proceed3;
 
         @FindBy(xpath = "//*[@id=\"HOOK_PAYMENT\"]/div[1]/div/p/a")
         private WebElement proceedPayment;

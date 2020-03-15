@@ -37,6 +37,7 @@ public class CustomExpectedConditionsTests {
         String correctPageLoaded = (new WebDriverWait(driver, 10))
                 .until(CustomExpectedCondition.pageIsLoaded(".com", "My Store"));
         Assert.assertThat("Failed to load correct page",correctPageLoaded,CoreMatchers.notNullValue());
+        System.out.println(correctPageLoaded);
 
     }
 
